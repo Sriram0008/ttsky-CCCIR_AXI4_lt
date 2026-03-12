@@ -22,7 +22,13 @@ async def axi_write(dut, addr, data):
     # Wait for done, safely handle X/Z
     max_cycles = 2000
     for _ in range(max_cycles):
-        val = int(dut.uo_out.value) & 0x1
+        #val = int(dut.uo_out.value) & 0x1
+        val_logic = dut.uo_out.value
+        if val_logic.is_resolvable:
+            val = int(val_logic) & 0x1
+        else:
+            val = 0
+            
         if val:
             break
         await RisingEdge(dut.clk)
