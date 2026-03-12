@@ -3,9 +3,9 @@ from cocotb.clock import Clock
 from cocotb.triggers import RisingEdge, Timer
 
 async def axi_write(dut, addr, data):
-"""AXI-Lite write using ui_in and uio_in"""
-
-
+"""
+Perform AXI4-Lite write: set ui_in and uio_in, wait for done safely
+"""
 # idle
 dut.ui_in.value = 0
 dut.uio_in.value = 0
